@@ -9,7 +9,7 @@ pipeline{
         stage('Checkout'){
             steps{
                 checkout scm
-                //git branch: 'main', url: 'https://github.com/iam-veeramalla/Ulitimate_CICD_Pipeline_Project.git'
+                //git branch: 'main', url: 'https://github.com/Lakshay-Aswal/Ulitimate_CICD_Pipeline_Project.git'
             }
         }
         stage('Build & Test'){

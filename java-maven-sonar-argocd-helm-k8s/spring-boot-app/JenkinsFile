@@ -54,7 +54,6 @@ pipeline{
                 GIT_USER_NAME = 'Lakshay-Aswal'
             }
             steps{
-                checkout scm // Add this line to ensure .git is present
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         git config user.email "aswallakshay02@gmail.com"

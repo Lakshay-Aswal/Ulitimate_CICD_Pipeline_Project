@@ -9,8 +9,8 @@ pipeline{
     stages{
         stage('Checkout'){
             steps{
-                //sh 'echo passed'
-                checkout scm
+                sh 'echo passed'
+                //checkout scm
                 //git branch: 'main', url: 'https://github.com/Lakshay-Aswal/Ulitimate_CICD_Pipeline_Project.git'
             }
         }

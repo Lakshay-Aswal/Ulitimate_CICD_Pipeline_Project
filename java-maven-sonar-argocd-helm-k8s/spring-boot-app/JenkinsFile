@@ -1,16 +1,14 @@
 pipeline{
     agent {
-    docker {
-        image 'lakshayaswal/maven-java17-docker:v1'
-        args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-        //args '--user root -v /var/run/docker.sock:/var/run/docker.sock -v $WORKSPACE:$WORKSPACE -w $WORKSPACE'
+      docker {
+        image 'lakshayaswal/maven-java17-docker-git:v1'
+        args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+      }
     }
-}
     stages{
         stage('Checkout'){
             steps{
                 sh 'echo passed'
-                //checkout scm
                 //git branch: 'main', url: 'https://github.com/Lakshay-Aswal/Ulitimate_CICD_Pipeline_Project.git'
             }
         }
@@ -56,8 +54,9 @@ pipeline{
             steps{
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        git config user.email "aswallakshay02@gmail.com"
-                        git config user.name "Lakshay-Aswal"
+                        git config --global user.email aswallakshay02@gmail.com
+                        git config --global user.name Lakshay-Aswal
+                        git config --global --add safe.directory /var/lib/jenkins/workspace/hell@2
                         BUILD_NUMBER=${BUILD_NUMBER}
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                         git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml

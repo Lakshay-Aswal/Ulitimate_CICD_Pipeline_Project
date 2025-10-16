@@ -21,7 +21,7 @@ pipeline{
         }
         stage('Static Code Analysis'){
             environment{
-                SONAR_URL = 'http://18.60.109.120:9000'
+                SONAR_URL = 'http://18.60.105.223:9000'
             }
             steps{
                 withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]){
@@ -56,7 +56,7 @@ pipeline{
                     sh '''
                         git config --global user.email aswallakshay02@gmail.com
                         git config --global user.name Lakshay-Aswal
-                        git config --global --add safe.directory /var/lib/jenkins/workspace/hell@2
+                        git config --global --add safe.directory /var/lib/jenkins/workspace/test
                         BUILD_NUMBER=${BUILD_NUMBER}
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                         git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml

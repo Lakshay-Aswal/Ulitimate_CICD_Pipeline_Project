@@ -1,6 +1,3 @@
----
-
-````{"id":"54731","variant":"standard","title":"Complete CI/CD Pipeline Setup (Jenkins, SonarQube, Docker, ArgoCD, Kubernetes)"}
 # 🚀 Complete CI/CD Pipeline Setup  
 **Tools Used:** Jenkins | SonarQube | Docker | Kubernetes (Minikube) | ArgoCD | GitHub  
 

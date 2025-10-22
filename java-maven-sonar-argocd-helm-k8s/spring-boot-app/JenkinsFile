@@ -9,7 +9,7 @@ pipeline{
         stage('Checkout'){
             steps{
                 sh 'echo passed'
-                //git branch: 'main', url: 'https://github.com/Lakshay-Aswal/Ulitimate_CICD_Pipeline_Project.git'
+                git branch: 'main', url: 'https://github.com/Lakshay-Aswal/Ulitimate_CICD_Pipeline_Project.git'
             }
         }
         stage('Build & Test'){
@@ -21,7 +21,7 @@ pipeline{
         }
         stage('Static Code Analysis'){
             environment{
-                SONAR_URL = 'http://18.60.105.223:9000'
+                SONAR_URL = 'http://18.60.54.181:9000'
             }
             steps{
                 withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]){
@@ -67,5 +67,13 @@ pipeline{
                 }
             }
         }
-    }  
+    }
+    post {
+          success {
+            slackSend(channel: '#devops', color: 'good', message: "✅ SUCCESS: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}")
+          }
+          failure {
+            slackSend(channel: '#devops', color: 'danger', message: "❌ FAILED: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}")
+          }
+        }
 }
